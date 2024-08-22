@@ -1,0 +1,52 @@
+<nav class="main-menu">
+    <div>
+      <div class="user-info">
+        {% if user.profile_image %}
+          <img class="img" src="{{ url_for('static', filename=user.profile_image) }}" alt="Music Image"/>
+        {% else %}
+          <img class="img" src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="MusicImage"/>
+        {% endif %}
+        <p class="img_display_name">{{ user.display_name }}</p>
+      </div>
+      <div class="content-dropdown">
+        <div class="dropdown">
+          <button class="dropdown-btn">User</button>
+          <div class="dropdown-content">
+            <a href="{{ url_for('input_user') }}">Edit User</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropdown-btn">Music</button>
+          <div class="dropdown-content">
+            <a href="{{ url_for('input_music') }}">Input Music</a>
+            <a href="{{ url_for('report_music') }}">List Music</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropdown-btn">Email</button>
+          <div class="dropdown-content">
+            <a href="{{ url_for('email_input') }}">Input Email</a>
+            <a href="{{ url_for('email_send') }}">Send Email</a>
+            <a href="{{ url_for('report_email') }}">List Email </a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropdown-btn">Reports</button>
+          <div class="dropdown-content">
+
+            <a href="{{ url_for('report_music') }}">List Music </a>
+          </div>
+        </div>
+        <div class="dropdown-placeholder">
+
+        </div>
+
+        <div class="dropdown">
+          <button class="logout-dropdown-btn"><a href="{{ url_for('logout') }}">Logout </a></button>
+
+        </div>
+
+      </div>
+
+      
+  </nav>

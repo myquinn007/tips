@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Studio</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/music/input.css') }}">
+    <style>
+      .hidden {
+          display: none;
+      }
+    </style>
+</head>
+
+<body>
+  <h1 class="page-header-input">Input Email</h1>
+  <div class="input-container">
+    <div class="container-upload-music">
+      <form id="survey-form" action=" {{ url_for('email_input' ) }}"  method="POST" enctype="multipart/form-data">
+
+        <label class="label" id="email" for="email"> Email:
+        </label>
+        {% if email.email %}
+          <input id="email" type="email" name='email' value="{{ email.email }}" class="fieldset" placeholder="Input Email" required/>
+        {% else %}
+        <input id="email" type="email" name='email' class="fieldset" placeholder="Input Email" required/>
+        {% endif %}
+        
+        <label class="label"  for="display_name">New Group:
+        </label>
+        {% if email.email_group %}
+          <input id="email_group" value="{{ email.email_group }}" name="email_group" type="text" class="fieldset" placeholder="Input Email Group For User" required/>
+        {% else %}
+          <input id="email_group" name="email_group" type="text" class="fieldset" placeholder="Input Email Group For User" required/>
+        {% endif %}
+
+        <label class="label"  >Existing Groups:
+        </label>
+        <div class="select-menu-playlist">
+          <div class="select_span_playlist">
+            <p class="sort_by">Groups</p>
+          </div>
+          <div class="options-list-playlist">
+
+            {% for unique_group in unique_group %}
+            <div class="option-playlist">
+              <input type="text" name="email_group_dropdown" value="{{ unique_group }} " readonly hidden>
+              {{ unique_group }}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <button type="Submit" id="submit" class="submitbutton" ><em>Submit<em></button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

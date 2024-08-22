@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Studio</title>
+    <!-- Include jQuery -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Include your custom css -->
+
+</head>
+
+<body>
+  <section>
+    <section >
+      <div class="sort-search">
+        <div>
+        <div class="sort-asnd_dsnd-container">
+          {% include "music/sort_files/send_emails_search_sort.html" %}
+        </div>
+
+        <div class="search-container">
+          <h1>Send Emails List</h1>
+          <div class="search-bar">
+            <form id="survey-form" action="{{ url_for('search') }}" method="POST" enctype="multipart/form-data">
+              <input name="search" class="search_input" placeholder="Search..."/>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="tbl-content">
+        <div class="border-list">
+        <table cellpadding="0" cellspacing="0" border="0" >
+          <tbody>
+            {% if sort_by == 'Email' %}
+              <td class="list-name-head">Email</td>
+              <td class="list-featuring-name-head">Email Group</td>
+            {% elif sort_by == 'Group Emails' %}
+            <td class="list-featuring-name-head">Email Group</td>
+            <td class="list-name-head">Email</td>
+            {% elif sort_by == 'Topic' %}
+            <td class="list-featuring-name-head">Topic</td>
+            <td class="list-name-head">Email</td>
+            {% elif sort_by == 'Date' %}
+            <td class="list-featuring-name-head">Date</td>
+            <td class="list-name-head">Email</td>
+            {% endif %}
+
+            {% for send_email in send_email %}
+            
+              <tr  class="music-row">
+                {% if sort_by == 'Email' %}
+                  <td class="list-name">{{ send_email.email }}</td>
+                  <td class="list-featuring-name">{{ send_email.email_group }}</td>
+                {% elif sort_by == 'Group Emails' %}
+                  <td class="list-featuring-name">{{ send_email.email_group }}</td>
+                  <td class="list-name">{{ send_email.email }}</td>
+                {% elif sort_by == 'Subject' %}
+                  <td class="list-featuring-name">{{ send_email.topic }}</td>
+                  <td class="list-name">{{ send_email.email }}</td>
+                {% elif sort_by == 'Date' %}
+                  <td class="list-featuring-name">{{ send_email.date_time }}</td>
+                  <td class="list-name">{{ send_email.email }}</td>
+                {% endif %}
+
+
+                <td class="action-buttons">
+                  <ul>
+                    <li>
+                      <p class="hidden-info-action-buttons">Group:    {{ send_email.email_group }}</p>
+                    </li>
+                    <li>
+                      <p class="hidden-info-action-buttons">Email:    {{ send_email.email }}</p>
+                    </li>
+                    <li>
+                      <p class="hidden-info-action-buttons">Date:    {{ send_email.date_time }}</p>
+                    </li>
+                    <li>
+                      <p class="hidden-info-action-buttons">Subject: {{ send_email.topic }}</p>
+                    </li>
+                    <li>
+                      <p class="hidden-info-action-buttons">Body:    {{ send_email.body }}</p>
+                    </li>
+                 </ul>
+                  <a href="{{ url_for('send_email_edit', pid=send_email.sid) }}"><button class="list-edit-button" id="edit">Edit</button></a>
+                  <a href="{{ url_for('send_email_delete', pid=send_email.sid) }}"><button class="list-delete-button" id="edit">Delete</button></a>
+                </td>
+              </tr>
+            
+            {% endfor %}
+          
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </section>
+
+  </section>
+  
+</body>
+</html>
+
+
+

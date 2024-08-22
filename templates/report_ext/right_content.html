@@ -1,0 +1,40 @@
+
+  <div class="recommended-songs">
+    <h1 class="page-header-right">Unpublished Music</h1>
+    <div class="song-container">
+      {% if unpublished %}
+        {% for unpublished in unpublished %}
+          <div class="song">
+            <!--
+            <div class="song-img">
+              {% if unpublished.image %}
+                <img class="img-50" src="{{ url_for('static', filename=unpublished.image) }}" alt="Music Image"/>
+              {% else %}
+                <img class="img-50" src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="Music Image"/>
+              {% endif %}
+              <div class="overlay">
+                <i class="fa-solid fa-play"></i>
+              </div>
+            </div>-->
+            <div class="song-title">
+              <h2 class="song-title-actual">{{ unpublished.name }}</h2>
+              <div class="song-title-author">
+                <p>{{ user.display_name }}</p>
+              </div>
+            </div>
+
+            {% if unpublished.publish > 0 %}
+              <a href="{{ url_for('publish_input', pid=unpublished.mic) }}"><button class="list-publish-button-right" >Unpublish</button></a>
+            {% else %}
+              <a href="{{ url_for('publish_input', pid=unpublished.mic) }}"><button class="list-publish-button-right" >Publish</button></a>
+            {% endif %}
+            
+          </div>
+        {% endfor %}
+
+      {% else %}
+        <p>Nothing to report</p>
+      {% endif %}
+    </div>
+
+  </div>

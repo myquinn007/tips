@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Studio</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Include your custom css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/music/input.css') }}">
+
+</head>
+<body>
+  <h1 class="page-header-input">Edit Music</h1>
+  <div class="input-container">
+    <div class="container-upload-music">
+      <form id="survey-form" action=" {{ url_for('music_edit', pid=edit_music.mic ) }}"  method="POST" enctype="multipart/form-data">
+        
+        <label class="label"  for="name"> Song Name:
+        </label>
+        {% if edit_music.name %}
+         <input id="name" value="{{ edit_music.name }}" name="name" type="text" class="fieldset" placeholder="Enter your track name"/>
+        {% else %}
+         <input id="name" value = "" name="name" type="text" class="fieldset" placeholder="Enter your track name"/>
+        {% endif %}
+        
+        <label class="label" for="music_upload"> Current Song Image: 
+          {% if edit_music.image %}
+            <img class="img-50"  src="{{ url_for('static', filename=edit_music.image) }}" alt="Music Image"/>
+          {% else %}
+            <img class="img-50"  src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="Music Image"/>
+          {% endif %}
+        </label>
+        <label class="label" id="img_upload" for="img_upload"> Change Song Image:
+        </label>
+        {% if edit_music.img_upload %}
+          <input id="img_upload" value="{{ edit_music.img_upload }}" type="file" name='img_upload' class="fieldset" placeholder="Enter your full name"/>
+        {% else %}
+          <input id="img_upload" type="file" name='img_upload' class="fieldset" placeholder="Enter your full name"/>
+        {% endif %}
+
+        <label class="label" id="featuring_name" for="featuring_name"> Featuring Artist Name:
+        </label>
+        {% if edit_music.featuring_name %}
+          <input id="featuring_name" value="{{ edit_music.featuring_name }}" type="text" name='featuring_name' class="fieldset" placeholder="Enter your featured artist name"/>
+        {% else %}
+          <input id="featuring_name" type="text" name='featuring_name' class="fieldset" placeholder="Enter your featured artist name"/>
+        {% endif %}
+               
+        <label class="label"> Featuring Artist Current Image: 
+          {% if edit_music.featuring_image %}
+            <img class="img-50"  src="{{ url_for('static', filename=edit_music.featuring_image) }}" alt="Music Image"/>
+          {% else %}
+            <img class="img-50"  src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="Music Image"/>
+          {% endif %}
+        </label>
+        <label class="label" id="featuring_image" for="featuring_image">Featuring Artist Image:
+        </label>
+        {% if edit_music.featuring_image %}
+         <input id="featuring_image" type="file" value="{{ edit_music.featuring_image }}" name='featuring_image' class="fieldset" placeholder="Enter your featured artist file"/>
+        {% else %}
+          <input id="featuring_image" type="file" name='featuring_image' class="fieldset" placeholder="Enter your featured artist file"/>
+        {% endif %}
+        
+        <label class="label" id="price" for="price"> Price:</label>
+        {% if edit_music.price %}
+        <input id="price" type="number" value="{{ edit_music.price }}" name='price' class="fieldset" placeholder="Enter price of music"/>
+        {% else %}
+        <input id="price" type="number" name='price' class="fieldset" placeholder="Enter price of music"/>
+        {% endif %}
+        <label class="label" id="price" for="price"> BPM:</label>
+        {% if edit_music.bpm %}
+        <input id="bpm" type="number" value="{{ edit_music.bpm }}" name='bpm' class="fieldset" placeholder="Enter BPM"/>
+        {% else %}
+        <input id="bpm" type="number" name='bpm' class="fieldset" placeholder="Enter BPM"/>
+        {% endif %}
+        <label class="label" id="key" for="key"> Key:</label>
+        {% if edit_music.key %}
+        <input id="key" type="text" value="{{ edit_music.key }}" name='key' class="fieldset" placeholder="Enter Key"/>
+        {% else %}
+        <input id="key" type="text" name='key' class="fieldset" placeholder="Enter Key"/>
+        {% endif %}
+        <label class="label" id="mood" for="mood"> Mood:</label>
+        {% if edit_music.mood %}
+        <input id="mood" type="text" value="{{ edit_music.mood }}" name='mood' class="fieldset" placeholder="Enter Mood"/>
+        {% else %}
+        <input id="mood" type="text" name='mood' class="fieldset" placeholder="Enter Mood"/>
+        {% endif %}
+        <label class="label" id="instrument" for="instrument"> Instruments:</label>
+        {% if edit_music.instrument %}
+        <input id="instrument" type="text" value="{{ edit_music.instrument }}" name='instrument' class="fieldset" placeholder="Enter Instrument(s)"/>
+        {% else %}
+        <input id="instrument" type="text" name='instrument' class="fieldset" placeholder="Enter Instrument(s)"/>
+        {% endif %}
+        
+        <label class="label" id="playlist" for="playlist"> Playlist :</label>
+        {% if edit_music.playlist %}
+        <input id="playlist" value="{{ edit_music.playlist }}" type="text" name='playlist' class="fieldset" placeholder="Save to playlist"/>
+        {% else %}
+        <input id="playlist" type="text" name='playlist' class="fieldset" placeholder="Save to playlist"/>
+        {% endif %}
+
+        <label class="label"  for="display_name">Existing Playlist:
+        </label>
+        <div class="select-menu-playlist">
+          <div class="select_span_playlist">
+            <p class="sort_by">Playlist</p>
+          </div>
+          <div class="options-list-playlist">
+
+            {% for unique_playlist in unique_playlist %}
+            <div class="option-playlist">
+              <input type="text" name="playlist_dropdown" value="{{ unique_playlist }}" readonly hidden>
+              {{ unique_playlist }}
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+        <button type="Submit" id="submit" class="submitbutton"><em>Submit</em></button>
+      </form>
+    </div>
+  </div>
+    <script src="{{ url_for('static', filename='js/music/music.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<div class="album-container containers">
+    {% if most_played %}
+        {% for most_played in most_played %}
+
+        <div class="album">
+        <div class="album-frame">
+            {% if most_played.image %}
+            <img   src="{{ url_for('static', filename=most_played.image) }}" alt="Music Image"/>
+            {% else %}
+            <img  src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="MusicImage"/>
+            {% endif %}
+        </div>
+        <div class="most-played-user-info">
+            <h2 class="most_played_name">{{ most_played.name }}</h2>
+            <p class="most_played_display_name">{{ user.display_name }}</p>
+        </div>
+        </div>
+        {% endfor %}
+    {% else %}
+    <p>Nothing to report.</p>
+    {% endif %}
+  </div>

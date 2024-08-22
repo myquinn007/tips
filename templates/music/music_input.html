@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Studio</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Include your custom css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/music/music_report1.css') }}">
+
+</head>
+
+<body>
+    <main>
+     
+      {% include "report_ext/dash_nav.html" %}
+
+      <section class="content">
+        <div class="left-content">
+            <div class="swiper-slide">
+              {% include "music/input_music.html" %}
+            </div>
+
+          </div>
+          <div class="right-content">
+            {% include "report_ext/music_input_right_content.html" %}
+  
+  
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/music/music.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Tips</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Include your custom css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/music/music.css') }}">
+
+</head>
+<header>
+    <div class="title-navbar">
+      {% include "navbar.html" %}
+    </div>
+</header> 
+<body>
+    <main>
+      <nav class="main-menu">
+        <div>
+          <div class="user-info">
+              {% if user.image %}
+                <img class="img" src="{{ url_for('static', filename=user.image) }}" alt="Music Image"/>
+              {% else %}
+                <img class="img" src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="MusicImage"/>
+              {% endif %}
+                <p>{{ most_downloaded.name }}</p>
+            <p>{{ user.name }}</p>
+          </div>
+          <ul>
+            <li class="nav-item ">
+              <a href="#">
+                <i class="fa fa-map nav-icon"></i>
+                <span class="nav-text">User Type</span>
+              </a>
+            </li>
+
+            <li class="nav-item active">
+              <a href="#">
+                <i class="fa fa-arrow-trend-up nav-icon"></i>
+                <span class="nav-text">User</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#">
+                <i class="fa fa-compact-disc nav-icon"></i>
+                <span class="nav-text">Music</span>
+              </a>
+            </li>
+            <div class="email-select-menu">
+              <div class="email-select">
+                <li class="email-nav-item  active">
+                  <a href="#">
+                    <i class="fa fa-arrow-trend-up nav-icon"></i>
+                    <span class="email-nav-text">Email List</span>
+                  </a>
+                </li>
+              </div>
+              <div class="email-options-list">
+                <div class="email-option"><a href="{{ url_for('group_email_input') }}">Email Group Input</a></div>
+                <div class="email-option"><a href="{{ url_for('report_music') }}">Email List</a></div>
+
+              </div>
+            </div>
+            <li class="nav-item">
+              <a href="#">
+                <i class="fa fa-circle-play nav-icon"></i>
+                <span class="nav-text">Playlist</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#">
+                <i class="fa fa-heart nav-icon"></i>
+                <span class="nav-text">Reports</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <ul>
+          <li class="nav-item">
+            <a href="#">
+              <i class="fa fa-user nav-icon"></i>
+              <span class="nav-text">Profile</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#">
+              <i class="fa fa-gear nav-icon"></i>
+              <span class="nav-text">Settings</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#">
+              <i class="fa fa-right-from-bracket nav-icon"></i>
+              <span class="nav-text">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <section class="content">
+        <div class="left-content">
+          <div class="slider-container">
+            <div class="swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    {% include "music/edit_music.html" %}
+
+                    <div class="slide-overlay">
+
+                    <h2 hidden>Midnight Moods</h2>
+                    <button hidden>
+                      Listen Now <i class="fa-solid fa-circle-play"></i>
+                    </button>
+                  </div>
+                </div>
+              
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="artists">
+            <h1>Most Downloaded</h1>
+            {% include "report_ext/most_downloaded.html" %}
+           
+          </div>
+
+          <div class="albums">
+
+            <h1>Most Played</h1>
+            {% include "report_ext/most_played.html" %}
+
+          </div>
+        </div>
+
+        <div class="right-content">
+          <div class="recommended-songs">
+            <h1>Music Uploaded</h1>
+            <div class="song-container">
+              {% for music in music %}
+              <div class="song">
+                <div class="song-img">
+                  {% if edit_music.image %}
+                    <img class="img-50"  src="{{ url_for('static', filename=edit_music.image) }}" alt="Music Image"/>
+                  {% else %}
+                    <img class="img-50"  src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="Music Image"/>
+                  {% endif %}
+                  <div class="overlay">
+                    <i class="fa-solid fa-play"></i>
+                  </div>
+                </div>
+                <div class="song-title">
+                  <h2>{{ music.name }}</h2>
+                  <p>{{ user.username }}</p>
+                </div>
+                <span>4:33</span>
+              </div>
+              {% endfor %} 
+          </div>
+
+          <div class="music-player">
+            <div class="album-cover">
+              <img src="images/album-cover.png" id="rotatingImage" alt="" />
+              <span class="point"></span>
+            </div>
+
+            <h2>{{music.name}}</h2>
+            <p>Queue Tips</p>
+
+            <audio id="song">
+              <source src="Besomorph-Coopex-Redemption.mp3" type="audio/mpeg" />
+            </audio>
+
+            <input type="range" value="0" id="progress" />
+
+            <div class="controls">
+              <button class="backward">
+                <i class="fa-solid fa-backward"></i>
+              </button>
+              <button class="play-pause-btn">
+                <i class="fa-solid fa-play" id="controlIcon"></i>
+              </button>
+              <button class="forward">
+                <i class="fa-solid fa-forward"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

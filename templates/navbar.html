@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Studio</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+</head>
+<body class="navbar-body">
+  <div class="nav">
+    <div class="burgerMenu">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+  <div class="mobileNav">
+    <ul class="navlinks">
+        <li><a class="mobileNavItem" href="/">Home</a></li>
+        <li><a class="mobileNavItem" href="/media">Media</a></li>
+        <li><a class="mobileNavItem" href="/services">Services</a></li>
+        <li><a class="mobileNavItem" href="/contact">Contact</a></li>
+    </ul>
+    <div class="mobilenavItemActiveContainer">
+      <div class="mobilenavItemActive">
+        <div class="mobilenavItemActiveCenter"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav2">
+    <div class="burgerMenu2">
+      <div class="bar2"></div>
+      <div class="bar2"></div>
+      <div class="bar2"></div>
+    </div>
+  </div>
+  <div class="mobileNav2">
+    <ul class="navlinks2">
+        <li><a class="mobileNavItem2" href="/signup">Signup</a></li>
+        <li><a class="mobileNavItem2" href="/login">Login</a></li>
+
+    </ul>
+    <div class="mobilenavItemActiveContainer2">
+      <div class="mobilenavItemActive2">
+        <div class="mobilenavItemActiveCenter2"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

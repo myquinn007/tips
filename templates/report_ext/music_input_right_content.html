@@ -1,0 +1,30 @@
+
+  <div class="recommended-songs">
+    <h1 class="page-header-right">Uploaded Music</h1>
+    <div class="song-container">
+      {% if music %}
+        {% for music in music %}
+          <div class="song">
+
+            <div class="song-title">
+              <h2>{{ music.name }}</h2>
+              <div class="song-title-author">
+                <p>{{ user.display_name }}</p>
+              </div>
+            </div>
+
+            {% if music.publish > 0 %}
+              <a href="{{ url_for('publish_input', pid=music.mic) }}"><button class="list-publish-button-right" >Unpublish</button></a>
+            {% else %}
+              <a href="{{ url_for('publish_input', pid=music.mic) }}"><button class="list-publish-button-right" >Publish</button></a>
+            {% endif %}
+            
+          </div>
+        {% endfor %}
+
+      {% else %}
+        <p>Nothing to report</p>
+      {% endif %}
+    </div>
+
+  </div>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Studio</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Include your custom css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/music/input.css') }}">
+
+</head>
+
+<body>
+  <h1 class="page-header-input">Edit User</h1>
+  <div class="input-container">
+      <div class="container-upload-music">
+        <form id="survey-form" action=" {{ url_for('input_user' ) }}"  method="POST" enctype="multipart/form-data">
+          <label class="label" for="profile_img"> Current Profile Image: 
+            {% if user.profile_image %}
+              <img class="img-50"  src="{{ url_for('static', filename=user.profile_image) }}" alt="Music Image"/>
+            {% else %}
+              <img class="img-50"  src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="Music Image"/>
+            {% endif %}
+          </label>
+          <label class="label"  for="profile_img">Upload Profile Image:
+          </label>
+          <input id="profile_img" name="profile_img" type="file" class="fieldset" />
+         <br>
+
+          <label class="label"  for="display_name">Display Name:
+          </label>
+
+          {% if user.display_name %}
+            <input id="display_name" value="{{ user.display_name }}" name="display_name" type="text" class="fieldset" placeholder="Input name you want displayed"/>
+          {% else %}
+            <input id="display_name" name="display_name" type="text" class="fieldset" placeholder="Input name you want displayed" required/>
+          {% endif %}
+
+          <label class="label" id="role" for="role"> Role <p> eg. Producer</p> :
+          </label>
+          {% if user.role %}
+            <input id="role" type="text" name='role' value="{{ user.role }}" class="fieldset" placeholder="Select your music file"/>
+          {% else %}
+          <input id="role" type="text" name='role' class="fieldset" placeholder="Select your music file"/>
+          {% endif %}
+         
+          <label class="label" for="backdrop_image"> Current Backdrop Image: 
+            {% if user.backdrop_image %}
+              <img class="img-50"  src="{{ url_for('static', filename=user.backdrop_image) }}" alt="Music Image"/>
+            {% else %}
+              <img class="img-50"  src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="Music Image"/>
+            {% endif %}
+          </label>
+          <label class="label" id="backdrop" for="backdrop">Upload Back Drop Image:
+          </label>
+          <input id="backdrop" type="file" name='backdrop' class="fieldset"/>
+
+          <br>
+
+          <button type="Submit" id="submit" class="submitbutton"><em>Submit<em></button>
+        </form>
+      </div>
+    </div>
+</body>
+</html>

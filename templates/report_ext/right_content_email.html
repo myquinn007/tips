@@ -1,0 +1,30 @@
+
+  <div class="recommended-songs">
+    <h1 class="page-header-right">Received Emails</h1>
+    <div class="song-container">
+      {% if email_group %}
+        {% for email_group in email_group %}
+          <div class="song">
+
+            <div class="song-title">
+              <h2 class="song-title-actual">{{ email_group.email }}</h2>
+              <div class="song-title-author">
+                <p>{{ user.display_name }}</p>
+              </div>
+            </div>
+
+            {% if email.email %}
+              <a href="{{ url_for('publish_input', pid=email_group.sic) }}"><button class="list-publish-button-right" >Unpublish</button></a>
+            {% else %}
+              <a href="{{ url_for('publish_input', pid=email_group.sic) }}"><button class="list-publish-button-right" >Publish</button></a>
+            {% endif %}
+            
+          </div>
+        {% endfor %}
+
+      {% else %}
+        <p>Nothing to report</p>
+      {% endif %}
+    </div>
+
+  </div>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Studio</title>
+    <!-- Include jQuery -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Include your custom css -->
+
+</head>
+
+<body>
+  <section>
+    <!--for demo wrap-->
+
+    <div class="search-container">
+      <h1>Uploaded Music</h1>
+      <div class="search-bar">
+        <form id="survey-form" action="{{ url_for('search') }}" method="POST" enctype="multipart/form-data">
+          <input name="search" id="search" type="text" class="fieldset" placeholder="Search..."/>
+        </form>
+      </div>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+          {% for music in music %}
+            <tr>
+              {% if music.image %}
+                <td><img class="img-50" src="{{ url_for('static', filename=music.image) }}" alt="Music Image"/></td>
+              {% else %}
+                <td><img class="img-50" src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="MusicImage"/></td>
+              {% endif %}
+                <td class="list-name">{{music.name}} </td>
+            </tr>
+
+              <tr hidden>
+                <td><a href="{{ url_for('music_edit', pid=music.mic) }}"><button class="list-edit-button"  id="edit">Edit</button></a></td>
+                <td><a href="{{ url_for('music_delete', pid=music.mic) }}"><button class="list-delete-button"  id="edit">Delete</button></a></td>
+              </tr>
+              <tr hidden>
+                <td><button class="list-play-button" onclick="playMusic('{{music.file}}', '{{music.mic}}')" id="play">Play</button></td>
+                {% if music.activity %}
+                  <td><button class="list-publish-button" onclick="unpublishMusic('')" id="download">Unpublish</button></td>
+                {% else %}
+                  <td><button class="list-publish-button" onclick="publishMusic('{{music.mic}}')" id="download">Publish</button></td>
+                {% endif %}
+                
+              </tr>
+
+            
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    
+  </section>
+
+  
+<script src="{{ url_for('static', filename='js/music/user_report.js') }}"></script>
+</body>
+</html>
+
+
+
