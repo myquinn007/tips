@@ -1,0 +1,151 @@
+    <section >
+    <div class="report-container">
+      <div class="tbl-content">
+        <h1 class="page-header">Received Payment</h1>
+        <div class="sort-search">
+          <div>
+          <div class="sort-asnd_dsnd-container">
+  
+              <form id="survey-form" action="{{ url_for('sort_choice_finance') }}" method="POST" enctype="multipart/form-data">
+    
+                <div class="select-menu1">
+                  <div class="select1_span">
+                    <p class="sort_by">Order By</p>
+                    
+                  </div>
+                  <div class="options-list1">
+                    <div class="option1">
+                      <input type="text" name="asnd_dsnd" value="asnd" readonly hidden>
+                      Asnd
+                    </div>
+                    <div class="option1" value="dsnd" name="asnd_dsnd">
+                      <input type="text" name="asnd_dsnd" value="dsnd" readonly hidden>
+                      Dsnd
+                    </div>
+                  </div>
+                </div>
+  
+  
+                <div class="select-menu2">
+                  <div class="select2_span">
+                       <p class="sort_by">Sort By</p>
+                  </div>
+                  <div class="options-list2">
+                    
+                    <div class="option2">
+                      <input type="text" name="sort_choice" value="bpm" readonly hidden>
+                      BPM
+                    </div>
+                    <div class="option2">
+                      <input type="text" name="sort_choice" value="instrument" readonly hidden>
+                      Instruments
+                    </div>
+                    <div class="option2">
+                      <input type="text" name="sort_choice" value="key" readonly hidden>
+                      Key
+                    </div>
+                    <div class="option2">
+                      <input type="text" name="sort_choice" value="mood" readonly hidden>
+                      Mood
+                    </div>
+                    <div class="option2">
+                      <input type="text" name="sort_choice" value="name" readonly hidden>
+                      Name
+                    </div>
+  
+                    <div class="option2">
+                      <input type="text" name="sort_choice" value="price" readonly hidden>
+                      Price
+                    </div>
+
+                  </div>
+                  <div class="sort_submit_div">
+                   <button class="sort_submit" type="submit">Submit</button>
+                  </div>
+                </div>
+                </form>
+  
+          </div>
+  
+          <div class="search-container">
+            <div class="search-bar">
+              <form id="survey-form" action="{{ url_for('search') }}" method="POST" enctype="multipart/form-data">
+                <input name="search" class="search_input" placeholder="Search..."/>
+              </form>
+            </div>
+          </div>
+
+        </div>
+        <div class="border-list">
+        <table cellpadding="0" cellspacing="0" border="0" >
+          <tbody>
+              <td class="list-img-50-head ">Img</td>
+              <td class="list-name-head">Name</td>
+            {% if sort_by == 'Price' %}
+              <td class="list-featuring-name-head">Price</td>
+            {% elif sort_by == 'Name' %}
+              <td class="list-featuring-name-head">Price</td>
+            {% elif sort_by == 'BPM' %}
+              <td class="list-featuring-name-head">BPM</td>
+            {% elif sort_by == 'Key' %}
+              <td class="list-featuring-name-head">Key</td>
+            {% elif sort_by == 'Mood' %}
+              <td class="list-featuring-name-head">Mood</td>
+            {% elif sort_by == 'Instruments' %}
+              <td class="list-featuring-name-head">Instruments</td>
+      
+            {% endif %}
+              
+            {% for music in music %}
+          
+              <tr  class="music-row">
+                <td >
+                {% if music.image %}
+                  <img class="img-50" src="{{ url_for('static', filename=music.image) }}" alt="Music Image"/>
+                {% else %}
+                  <img class="img-50" src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="MusicImage"/>
+                {% endif %}
+                </td>
+                
+                <td class="list-name">{{ music.name }}</td>
+
+                {% if sort_by == 'Price' %}
+                  <td class="list-featuring-name">{{ music.price }}</td>
+                {% elif sort_by == 'Name' %}
+                  <td class="list-featuring-name">{{ music.price }}</td>
+                {% elif sort_by == 'BPM' %}
+                  <td class="list-featuring-name">{{ music.bpm }}</td>
+                {% elif sort_by == 'Key' %}
+                  <td class="list-featuring-name">{{ music.key }}</td>
+                {% elif sort_by == 'Mood' %}
+                  <td class="list-featuring-name">{{ music.mood }}</td>
+                {% elif sort_by == 'Instruments' %}
+                  <td class="list-featuring-name">{{ music.instrument }}</td>
+                {% else %}
+                  <td class="list-featuring-name">{{ music.price }}</td>
+                {% endif %}
+                 
+                <td class="action-buttons">
+                  <ul><p class="hidden-info-action-buttons">Email: </p><p class="hidden-info-action-output">{{ music.email }}</p><br>
+                    <p class="hidden-info-action-buttons">Name: </p><p class="hidden-info-action-output">{{ music.name }}</p><br>
+                    <p class="hidden-info-action-buttons">BPM: </p><p class="hidden-info-action-output">{{ music.bpm }}</p><br>
+                    <p class="hidden-info-action-buttons">Key: </p><p class="hidden-info-action-output">{{ music.key }}</p><br>       
+                    <p class="hidden-info-action-buttons">Mood: </p><p class="hidden-info-action-output">{{ music.mood }}</p><br>
+                    <p class="hidden-info-action-buttons">Instrument(s): </p><p class="hidden-info-action-output">{{ music.instrument }}</p><br>
+                    <p class="hidden-info-action-buttons">Price: </p><p class="hidden-info-action-output">{{ music.price }}</p><br>
+
+                </td>
+              </tr>
+
+            {% endfor %}
+          
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+    </section>
+
+
+
+

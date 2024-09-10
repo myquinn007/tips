@@ -147,21 +147,22 @@
                   <td class="list-featuring-name">{{ music.mood }}</td>
                 {% elif sort_by == 'Instruments' %}
                   <td class="list-featuring-name">{{ music.instrument }}</td>
-          
+                {% else %}
+                  <td class="list-featuring-name">{{ music.price }}</td>
                 {% endif %}
                  
                 <td class="action-buttons">
                   <ul>
+                    <p class="hidden-info-action-buttons">Name: </p><p class="hidden-info-action-output">{{ music.name }}</p><br>
                     <p class="hidden-info-action-buttons">BPM: </p><p class="hidden-info-action-output">{{ music.bpm }}</p><br>
                     <p class="hidden-info-action-buttons">Key: </p><p class="hidden-info-action-output">{{ music.key }}</p><br>       
                     <p class="hidden-info-action-buttons">Mood: </p><p class="hidden-info-action-output">{{ music.mood }}</p><br>
-                    <p class="hidden-info-action-buttons">Instrument: </p><p class="hidden-info-action-output">{{ music.instrument }}</p><br>
+                    <p class="hidden-info-action-buttons">Instrument(s): </p><p class="hidden-info-action-output">{{ music.instrument }}</p><br>
                     <p class="hidden-info-action-buttons">Price: </p><p class="hidden-info-action-output">{{ music.price }}</p><br>
                     <p class="hidden-info-action-buttons">Downloaded: </p><p class="hidden-info-action-output">{{ music.downloaded }}</p><br>
                     <p class="hidden-info-action-buttons">Played: </p><p class="hidden-info-action-output">{{ music.played }}</p><br>
-                    <p class="hidden-info-action-buttons">Publish: </p><p class="hidden-info-action-output">{{ music.publish }}</p><br>
                     <p class="hidden-info-action-buttons">Playlist: </p><p class="hidden-info-action-output">{{ music.playlist }}</p><br>
-                    <p class="hidden-info-action-buttons">Featured Artist: </p><p class="hidden-info-action-output">{{ music.featuring_name }}</p><br>
+                    <p class="hidden-info-action-buttons">Featured Artist(s): </p><p class="hidden-info-action-output">{{ music.featuring_name }}</p><br>
                     {% if music.publish == 1 %}
                       <p class="hidden-info-action-buttons">Published: </p><p class="hidden-info-action-output">Yes</p><br>
                     {% else %}

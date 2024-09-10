@@ -7,7 +7,9 @@
   margin-top: 38px;
   margin-left: 38px;
 }
-
+.nav{
+  position: static;
+}
 .navLogo {
   top: 10px;
   left: 10px;

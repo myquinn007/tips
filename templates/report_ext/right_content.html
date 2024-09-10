@@ -5,17 +5,6 @@
       {% if unpublished %}
         {% for unpublished in unpublished %}
           <div class="song">
-            <!--
-            <div class="song-img">
-              {% if unpublished.image %}
-                <img class="img-50" src="{{ url_for('static', filename=unpublished.image) }}" alt="Music Image"/>
-              {% else %}
-                <img class="img-50" src="{{ url_for('static', filename='images/no_image.jpg') }}" alt="Music Image"/>
-              {% endif %}
-              <div class="overlay">
-                <i class="fa-solid fa-play"></i>
-              </div>
-            </div>-->
             <div class="song-title">
               <h2 class="song-title-actual">{{ unpublished.name }}</h2>
               <div class="song-title-author">

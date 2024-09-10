@@ -34,7 +34,7 @@ class Music(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.uid'))
     played = db.Column(db.Integer, default=0)
     downloaded = db.Column(db.Integer, default=0)
-    price = db.Column(db.Integer)
+    price = db.Column(db.Integer, default=0)
     publish = db.Column(db.Integer, default=0)
     playlist = db.Column(db.String(200))
     date_time = db.Column(db.DateTime, default=datetime.utcnow)
@@ -70,3 +70,32 @@ class SendEmail(db.Model):
     attachement = db.Column(db.String(200))
     date_time = db.Column(db.DateTime, default=datetime.utcnow)
     inputter = db.Column(db.String(150), nullable=False)
+
+class VerificationEmail(db.Model):
+    __tablename__ = "verification_email"
+
+    email = db.Column(db.String(200), primary_key=True)
+    verified = db.Column(db.Integer, default=0)
+    verification_test =  db.Column(db.Integer, default=0)
+    date_time = db.Column(db.DateTime, default=datetime.utcnow)
+    inputter = db.Column(db.String(150), nullable=False)
+
+
+class PaymentReceived(db.Model):
+    __tablename__ = "payment_received"
+
+    pid = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(200))
+    music =  db.Column(db.Integer, db.ForeignKey('music.mic'))
+    name = db.Column(db.String(200))
+    download_number = db.Column(db.Integer, default=0)
+    image = db.Column(db.String(200))
+    file = db.Column(db.String(200))
+    price = db.Column(db.Integer, default=0)
+    bpm = db.Column(db.Integer, default=0)
+    key = db.Column(db.String(100))
+    mood = db.Column(db.String(100))
+    instrument = db.Column(db.String(200))
+    date_time = db.Column(db.DateTime, default=datetime.utcnow)
+    inputter = db.Column(db.String(150), nullable=False)
+

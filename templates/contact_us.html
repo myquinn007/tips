@@ -1,17 +1,28 @@
 {% extends "base.html" %}
 
-{% block title %} Contact Us {% endblock %}
+{% block title %} King Tips {% endblock %}
 
 {% block content %}
 
 <body>
     <h1>Contact Us</h1>
     <br>
-    <br>
-    <form action=" {{ url_for('contact_us' ) }}"  method="POST" enctype="multipart/form-data"></form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li >{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <br> 
+    
+    <form action=" {{ url_for('contact_us' ) }}"  method="POST" enctype="form-data">
         <p>Email: <input name="email" type="email" placeholder="Enter Email"></p>
+        <input name="type" type="text"  value="incoming" readonly hidden>    
         <br>
-        <p>Contact Us: <input name="email" type="textarea" placeholder="What's on your mind?"></p>
+        <p>Contact Us: <input name="message" type="textarea" placeholder="What's on your mind?"></p>
         <br>
         <br>
         <button type="Submit" id="submit" class="submitbutton"><em>Submit<em></button>

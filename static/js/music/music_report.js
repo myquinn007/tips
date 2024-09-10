@@ -190,24 +190,54 @@ function deletePlaylist(mic) {
   })
 }
 
-function playMusic(pid, mic){
-  let audio = new Audio('static/'+pid)
-  audio.play()
-  // audio.pause()
-  const url = "/play_music/" + mic;
-  console.log(url)
+let currentAudio = null;  // Track the currently playing audio
 
-  // sleep before update
+function playMusic(pid, mic) {
+  // If a track is already playing, pause it
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0; // Reset audio to the beginning
+  }
+
+  // Create a new audio element for the selected track
+  currentAudio = new Audio('static/' + pid);
+
+  // Play the selected track
+  currentAudio.play();
+  
+  // Change the button to "Pause" while the track is playing
+  let playButton = document.getElementById('play');
+  playButton.innerHTML = '<i class="ion-ios-pause"></i> Pause';
+
+  // Stop playing after 30 seconds
+  setTimeout(() => {
+    currentAudio.pause();
+    currentAudio.currentTime = 0; // Reset to the beginning
+    playButton.innerHTML = '<i class="ion-ios-play"></i> Play'; // Change button back to "Play"
+  }, 30000); // 30 seconds in milliseconds
+
+  // Send a request to update play status
+  const url = "/play_music/" + mic;
   fetch(url, {
     method: 'POST'
-  }).then (response => {
+  }).then(response => {
     if (response.ok) {
       console.log('Play Updated: ' + mic );
-      //window.location.reload();
     } else {
       console.error('Failed to Play item pid: ' + mic );
     }
   }).catch(error => {
     console.error('Error during fetching: ' + error);
-  })
+  });
+
+  // Add click event to pause the song when button is clicked again
+  playButton.onclick = () => {
+    if (!currentAudio.paused) {
+      currentAudio.pause();
+      playButton.innerHTML = '<i class="ion-ios-play"></i> Play';
+    } else {
+      currentAudio.play();
+      playButton.innerHTML = '<i class="ion-ios-pause"></i> Pause';
+    }
+  };
 }

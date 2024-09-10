@@ -314,6 +314,15 @@ body a:hover {
   height: 150px;
   border-radius: 50%;
 }
+.messages-media {
+  right: 2%;
+  top: 2%;
+  position: absolute;
+  width: 250px;
+  height: 190px;
+  background-color: #1ed760;
+  border-radius: 30px;
+}
 .artist__header .artist__info__type {
   color: #aaaaaa;
   text-transform: uppercase;

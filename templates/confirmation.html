@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %} King Tips {% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login/login.css') }}">
+
+<h1>Confirmation Page</h1>
+
+<br><div class="ar_form">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li >{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('get_confirmation', email=email, type=type, mic=mic) }}" method="POST" enctype="form-data">
+
+        <input class="username" type="number" name="confirm" placeholder="Please Enter Confirmation Number." required="required" aria-label="Confirmation"><br>
+        <input class="submit" type="submit" value="Confirm">
+    </form>
+</div>
+{% endblock %}

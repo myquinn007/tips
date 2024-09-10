@@ -73,16 +73,22 @@ body {
   resize: both;
   position: relative;
 }
-
+@media (max-width: 1800px) {
+  /* From input.css */
+  .container-upload-music {
+    width: 130%;
+  }
+}
 
 @media (max-width: 1600px) {
   .container-upload-music {
-    width: 120%;
+    width: 130%;
   }
 
 }
 @media (max-width: 1250px) {
   .container-upload-music {
+
     width: 100%;
   }
   .input-container {
