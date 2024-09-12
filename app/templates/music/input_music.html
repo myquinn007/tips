@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King Tipps</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Include your custom css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/music/input.css') }}">
+    <style>
+      .hidden {
+          display: none;
+      }
+    </style>
+</head>
+
+<body>
+    <h1 class="page-header-input">Input Music</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li >{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+<div class="input-container">
+    <div class="container-upload-music">
+        
+        <form id="survey-form" action="{{ url_for('music_input') }}" method="POST" enctype="multipart/form-data">
+            <label class="label" for="folder">Select Folder To Bulk Upload:</label>
+            <input id="folder" name="folder" type="file" class="fieldset" placeholder="Select your Folder" webkitdirectory directory multiple/>
+
+            <div id="other-fields">
+                <br>
+                <label class="label" for="name">Title:</label>
+                <input id="name" name="name" type="text" class="fieldset" placeholder="Select your Image"/>
+                <label class="label" id="img_upload" for="img_upload"> Music Image Upload:</label>
+                <input id="img_upload" type="file" name='img_upload' class="fieldset" placeholder="Select your music file"/>
+                <label class="label" id="music_upload" for="music_upload"> Music file Upload:</label>
+                <input id="music_upload" type="file" name='music_upload' class="fieldset" placeholder="Enter your full name"/>
+                <label class="label" id="featuring_name" for="featuring_name"> Featuring Artist Name:</label>
+                <input id="featuring_name" type="text" name='featuring_name' class="fieldset" placeholder="Enter your featured artist name"/>
+                <label class="label" id="featuring_image" for="featuring_image">Featuring Artist Image:</label>
+                <input id="featuring_image" type="file" name='featuring_image' class="fieldset" placeholder="Enter your featured artist file"/>
+            </div>
+            <label class="label" id="price" for="price"> Price:</label>
+            <input id="price" type="number" name='price' class="fieldset" placeholder="Enter Price"/>
+            <label class="label" id="bpm" for="bpm"> BPM:</label>
+            <input id="bpm" type="number" name='bpm' class="fieldset" placeholder="Enter BPM"/>
+            <label class="label" id="key" for="key"> Key:</label>
+            <input id="key" type="text" name='key' class="fieldset" placeholder="Enter Key"/>
+            <label class="label" id="mood" for="mood"> Mood:</label>
+            <input id="mood" type="text" name='mood' class="fieldset" placeholder="Enter Mood"/>
+            <label class="label" id="instrument" for="instrument"> Instrument:</label>
+            <input id="instrument" type="text" name='instrument' class="fieldset" placeholder="Enter Instrument(S)"/>     
+            
+            <label class="label" id="playlist" for="playlist">New Playlist :</label>
+            <input id="playlist" type="text" name='playlist' class="fieldset" placeholder="Save to playlist"/>
+
+            <label class="label"  for="display_name">Existing Playlist:
+            </label>
+
+            <div class="select-menu-playlist">
+              <div class="select_span_playlist">
+                <p class="sort_by" >Playlist</p>
+              </div>
+              <div class="options-list-playlist">
+
+                {% for unique_playlist in unique_playlist %}
+                <div class="option-playlist">
+                  <input type="text" name="playlist_dropdown" value="{{ unique_playlist }}" readonly hidden>
+                  {{ unique_playlist }}
+                </div>
+                {% endfor %}
+
+              </div>
+            </div>
+            
+            
+            <button type="Submit" id="submit" class="submitbutton"><em>Submit</em></button>
+        </form>
+
+    </div>
+  </div>
+</body>
+</html>

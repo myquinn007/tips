@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}King Tipps{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login/signup.css') }}">
+<h1 class="heading_">Sign Up Page</h1>
+<br>
+<form action="{{ url_for('signup') }}" method='POST'>
+    <body>
+        <header>
+            <div class="title-navbar">
+              {% include "navbar.html" %}
+            </div>
+        </header>
+        <div class="ar_form">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li >{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+            <form action=" {{ url_for('signup') }}" method="POST">
+                <input class="username" type="email" name="username" placeholder="Username" required="required"/>
+                <input class="username" type="password" name="password" placeholder="Password" required="required">
+                <input class="submit" type="submit" value="Sign Up" />
+            </form>
+        </div>
+    </body>
+</form>
+{% endblock %}
+

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King Tipps</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Include your custom css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/music/input.css') }}">
+
+</head>
+
+<body>
+  <h1 class="page-header-input">Edit Email</h1>
+  <div class="input-container">
+    <div class="search-container">
+    </div>
+      <div class="container-upload-music">
+        <form id="survey-form" action=" {{ url_for('email_edit', pid=email.sid ) }}"  method="POST" enctype="multipart/form-data">
+        
+        
+
+          <label class="label"  for="display_name">New Group:
+          </label>
+          {% if email.email_group %}
+            <input id="email_group" value="{{ email.email_group }}" name="email_group" type="text" class="fieldset" placeholder="Input Email Group For User"/>
+          {% else %}
+            <input id="email_group" name="email_group" type="text" class="fieldset" placeholder="Input Email Group For User" required/>
+          {% endif %}
+
+          <label class="label" id="email" for="email"> Email:
+          </label>
+          {% if email.email %}
+            <input id="email" type="email" name='email' value="{{ email.email }}" class="fieldset" placeholder="Input Email"/>
+          {% else %}
+          <input id="email" type="email" name='email' class="fieldset" placeholder="Input Email"/>
+          {% endif %}
+
+          <label class="label" id="topic" for="topic"> Subject:
+          </label>
+          {% if email.topic %}
+            <input id="topic" type="text" name='topic' value="{{ email.topic }}" class="fieldset" placeholder="Input Subject"/>
+          {% else %}
+          <input id="topic" type="text" name='topic' class="fieldset" placeholder="Input Subject"/>
+          {% endif %}
+          <label class="label" id="body" for="body"> Email Body:
+          </label>
+          {% if email.body %}
+            <input id="body" type="text" name='body' value="{{ email.body }}" class="textarea" placeholder="Input Email Body "/>
+          {% else %}
+          <input id="body" type="textarea" name='body' class="textarea" placeholder="Input Email Body"/>
+          {% endif %}
+          <label class="label"  >Existing Groups:
+          </label>
+          <div class="select-menu-playlist">
+            <div class="select_span_playlist">
+              <p class="sort_by">Groups</p>
+            </div>
+            <div class="options-list-playlist">
+              <h1>Hello: {{ unique_group }}</h1>
+              {% for unique_group in unique_group %}
+              <div class="option-playlist">
+                <input type="text" name="email_group_dropdown" value="{{ unique_group }} " readonly hidden>
+                {{ unique_group }}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <button type="Submit" id="submit" class="submitbutton"><em>Submit<em></button>
+        </form>
+      </div>
+    </div>
+</body>
+</html>
