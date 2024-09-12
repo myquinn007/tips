@@ -1,0 +1,24 @@
+# Use the python 3.9-slim image
+FROM python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Sync the time and install system dependencies for mysqlclient
+RUN apt-get update && apt-get install -y \
+    ntpdate \
+    && ntpdate -s time.nist.gov \
+    && apt-get install -y \
+    default-libmysqlclient-dev \
+    build-essential \
+    pkg-config
+
+# Copy the current directory to /app in the container
+COPY . /app
+
+# Install Python dependencies
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# Command to run uWSGI with the app.ini config file
+CMD ["uwsgi", "app.ini"]
